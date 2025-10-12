@@ -15,6 +15,6 @@ class CategorySeeder extends Seeder
             ['cat_name' => 'Makanan', 'description' => 'kategori Makanan'],
             ['cat_name' => 'Minuman', 'description' => 'Kategori Minuman'],
         ];
-        \DB::table('categories')->insert($categories);
+        DB::table('categories')->insert($categories);
     }
 }
