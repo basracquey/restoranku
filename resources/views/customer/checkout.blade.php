@@ -112,9 +112,9 @@
                                             <h4 class="mb-0 ps-4 me-4">Total</h4>
                                             <h5 class="mb-0 pe-4">Rp{{ number_format($total, 0, ',','.') }}</h5>
                                         </div>
-
+                                        
                                         <div class="py-4 mb-4 d-flex justify-content-between">
-                                            <h5 class="mb-0 ps-4 me-4">Metode Pembayaran</h5>
+                                            <h5 class="mb-0 ps-4 me-4">Pilih Metode Pembayaran:</h5>
                                             <div class="mb-0 pe-4 mb-3 pe-5">
                                                 <div class="form-check">
                                                     <input type="radio" class="form-check-input bg-primary border-0" id="qris" name="payment_method" value="qris">
@@ -129,7 +129,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn border-secondary py-3 text-uppercase text-primary">Konfirmasi Pesanan</button> 
+                                        <button type="button" id="pay-button" class="btn border-secondary py-3 text-uppercase text-primary">Konfirmasi Pesanan</button> 
                                     </div>
                                     
                                 </div>
@@ -139,4 +139,58 @@
                 </form>
             </div>
         </div>
+
+        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const payButton = document.getElementById("pay-button");
+        const form = document.querySelector("form");
+
+        payButton.addEventListener("click", function () {
+            let paymentMethod = document.querySelector('input[name="payment_method"]:checked');
+
+            if(!paymentMethod) {
+                alert("Pilih Metode Pembayaran Terlebih Dahulu!");
+                return;
+            }
+
+            paymentMethod = paymentMethod.value;
+            let formData = new FormData(form);
+
+            if(paymentMethod === "tunai") {
+                form.submit();
+            } else {
+                fetch("{{ route('checkout.store') }}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.snap_token) {
+                        snap.pay(data.snap_token, {
+                            onSuccess: function(result) {
+                                window.location.href = "/checkout/success/" + data.order_code;
+                            },
+                            onPending: function(result) {
+                                alert("Menunggu Pembayaran");
+                            },
+                            onError: function(result) {
+                                alert("Pembayaran Gagal");
+                            }
+                        });
+                    } else {
+                        alert("Terjadi kesalahan, silakan coba lagi.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Terjadi kesalahan, silakan coba lagi ya.");
+                });
+            }
+        })
+        })
+        </script>
 @endsection
