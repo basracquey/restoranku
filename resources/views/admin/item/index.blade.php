@@ -68,13 +68,13 @@
                                 <a href="{{ route('items.edit', $item->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil"></i> Ubah
                                 </a>
-                                <form action="{{ route('items.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <!-- <form action="{{ route('items.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus menu ini?')">
                                         <i class="bi bi-trash"></i> Hapus
                                     </button>
-                                </form>
+                                </form> -->
                             </td>
                             <td>
                                 @if ($item->is_active == 1)
