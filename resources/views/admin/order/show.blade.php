@@ -23,6 +23,10 @@
         </div>
     </div>
     <section class="section">
+        <a href="{{ route('orders.index') }}" class="btn btn-secondary mb-3">
+    Kembali
+</a>
+
         <div class="card">
             <div class="card-header">
                 <h4>Kode Pesanan: {{ $order->order_code }}</h4>
