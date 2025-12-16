@@ -85,8 +85,15 @@
                                 </a>
                             </li>
                         <!-- endif -->
-
-                        <!-- sidebar logout button -->
+                <li class="sidebar-item">
+                    <form method="POST" action="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                        @csrf
+                        <a href="{{ route('logout') }}" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>{{ __('Log Out') }}</span>
+                        </a>
+                    </form>
+                </li>
                         
                     </ul>
                 </div>
