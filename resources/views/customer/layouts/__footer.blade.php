@@ -28,8 +28,8 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-item">
                             <h4 class="text-light mb-3">Hubungi Kami</h4>
-                            <p>Alamat: Jl. Sangkuriang No.8, Padasuka, Kec. Cimahi Tengah, Kota Cimahi, Jawa Barat 40526</p>
-                            <p>Email: info@codepolitan.com</p>
+                            <p>Alamat: JJl. Sakura Raya No. 88, Kel. Pluit Indah, Kec. Penjaringan, Jakarta Utara 14450</p>
+                            <p>Email: info@restorankularavelproject.com</p>
                             <p>Telp: 0899-9488-990</p>
                         </div>
                     </div>

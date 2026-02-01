@@ -20,6 +20,7 @@ Route::post('/cart/add', [MenuController::class, 'addToCart'])->name('cart.add')
 Route::get('/cart/clear', [MenuController::class, 'clearCart'])->name('cart.clear');
 Route::post('/cart/update', [MenuController::class, 'updateCart'])->name('cart.update');
 Route::post('/cart/remove', [MenuController::class, 'removeCart'])->name('cart.remove');
+
 Route::get('/checkout', [MenuController::class, 'checkout'])->name('checkout');
 Route::post('/checkout/store', [MenuController::class, 'storeOrder'])->name('checkout.store');
 Route::get('/checkout/success/{orderId}', [MenuController::class, 'checkoutSuccess'])->name('checkout.success');
